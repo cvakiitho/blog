@@ -9,11 +9,11 @@ permalink:           pretty
 
 # Setup
 title:               cvak's blog
-tagline:             "whatever needed a place to live"
+tagline:             "Programming, DevOps, making stuff"
 description:         'A stable place for longer posts not fitting reddit.'
 url:                 https://github.com/cvakiitho/blog
 baseurl:             ''
-paginate:            5
+paginate:            1
 
 # About/contact
 author:
