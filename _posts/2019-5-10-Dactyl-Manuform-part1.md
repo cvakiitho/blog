@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dactyl Manuform build log: part 1"
-categories: [mk, ergo]
+categories: [dactyl]
 tags: [ mechanical keyboards, dactyl manuform, cherry mx, soldering, 3d printing]
 ---
 ![Dactyl Pre Build](/public/dactyl_pre_build.webp)
@@ -12,7 +12,7 @@ Welcome to a first post in a build log series, about a very first mechanical key
 
 I wanted to document how to build a handwired keyboard, because I myself, used several similar build logs, to get the motivation, and necessary guidance through the process of building such thing. I'm also 90% sure I will be building similar keyboard again in the future, and I'd like to have a place to get back to if needed.
 
-## Series Parts:
+## Parts:
 - Motivation
 - Ergonomic Keyboards
 - Various Dactyls
@@ -28,4 +28,6 @@ As a SW Engineer I write a lot of code, a lot of text, and spend a lot of time b
 - [Safari - Vimmy](https://gggritso.com/vimmy.safariextension/)
 - [VSCode - Vim](https://github.com/VSCodeVim/Vim)
 
-After a bit I realized how much time I really spend with my fingers on a keyboard. so why not but a bit of effort in researching better options 
+After a bit I realized how much time I really spend with my fingers on a keyboard, and that it would be a good idea
+to put a bit of effort in searching for more ergonomic typing device.
+
