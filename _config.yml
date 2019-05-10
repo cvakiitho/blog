@@ -8,10 +8,10 @@ pygments:         true
 permalink:           pretty
 
 # Setup
-title:               Cvak's blog
-tagline:             "Cvak's blog"
+title:               cvak's blog
+tagline:             "whatever needed a place to stay"
 description:         'A stable place for longer posts not fitting reddit.'
-url:                 https://blog.mann.cf
+url:                 https://github.com/cvakiitho/blog
 baseurl:             ''
 paginate:            5
 
