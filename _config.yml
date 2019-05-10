@@ -6,7 +6,7 @@ relative_permalinks: true
 
 # Setup
 title:               Cvak's blog
-tagline:             'Cvak\'s blog'
+tagline:             "Cvak's blog"
 description:         'A stable place for longer posts not fitting reddit.'
 url:                 https://blog.mann.cf
 baseurl:             ''
