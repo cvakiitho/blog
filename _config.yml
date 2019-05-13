@@ -11,7 +11,7 @@ title:               cvak's blog
 tagline:             "Programming, DevOps, making stuff"
 description:         'A stable place for longer posts not fitting reddit.'
 baseurl:             'https://blog.mann.cf'
-paginate:            1
+paginate:           3 
 
 github:
   url:                 https://github.com/cvakiitho/blog
