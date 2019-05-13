@@ -3,7 +3,7 @@
 
   {% include head.html %}
 
-  <body>
+  <body class="theme-base-08">
 
     {% include sidebar.html %}
 
@@ -20,7 +20,7 @@
       </div>
 
       <div class="container content">
-        {{ content }}
+        {% include anchor_headings.html html=content %}
       </div>
     </div>
 
