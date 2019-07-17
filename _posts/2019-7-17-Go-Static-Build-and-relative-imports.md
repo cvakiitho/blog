@@ -7,7 +7,7 @@ tags: [ programming, go, docker]
 
 This post was only made because, because docker docs example wasn't working for me:
 
-https://docs.docker.com/develop/develop-images/multistage-build/
+[https://docs.docker.com/develop/develop-images/multistage-build/](https://docs.docker.com/develop/develop-images/multistage-build/)
 
 It is reasonable to use multi-stage build for containers with go binaries, because image to build go is pretty large:
 
@@ -120,6 +120,10 @@ CMD ["/app/<package>"]
 => ~10 MB image(depends on Go dependencies)
 
 We can go further, and build statically linked binary, and use scratch docker image:
+
+*if you try to use standard binary with scratch image you'll end with*
+
+`standard_init_linux.go:207: exec user process caused "no such file or directory"`
 
 Dockerfile
 ```
