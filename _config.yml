@@ -10,7 +10,7 @@ permalink:           :categories/:title/
 title:               cvak's blog
 tagline:             "Programming, DevOps, making stuff"
 description:         'A stable place for longer posts not fitting reddit.'
-baseurl:             'https://blog.mann.cf'
+baseurl:             'https://blogmann.cf'
 paginate:           3 
 
 github:
