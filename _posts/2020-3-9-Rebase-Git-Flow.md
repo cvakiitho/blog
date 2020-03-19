@@ -40,13 +40,13 @@ Do some commits, and keep your branch updated with latest changes from develop b
 ```
   git add -u; git commit -m "My great commit"
   git pull origin develop --rebase
-  git push -u fork feature/my_awesome_feature
+  git push -u origin feature/my_awesome_feature
 ```
 
 Due to possible commit order getting updated, you might need to force push, I recommend to use `--force-with-lease` to verify that upstream branch is in state that you expect, nobody pushed anything, and you fetched latest changes.
 
 ```
-  git push fork -feature/my_awesome_feature --force-with-lease
+  git push origin feature/my_awesome_feature --force-with-lease
 ``` 
 After your feature branch is ready, create Pull request, rebase/squash/merge here is up to developer, 
 
