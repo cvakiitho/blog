@@ -9,7 +9,7 @@ In todays post I'd like to go through Jenkins pipeline unit testing using jenkin
 
 Post has two parts, [Spock](#spock) with just enough spock explanation to write tests, and [Jenkins-Spock](#jenkins-spock-library) with jenkins-spock library quick tour.
 
-# Spock
+# [Spock](#spock)
 Jenkins-spock uses standard groovy spock for test structure:
 
 You need to extend `Specification` class if you are testing groovy classes, or `JenkinsPipelineSpecification` if you are testing JenkinsFiles, and vars scripts.
@@ -21,7 +21,7 @@ And are broken into parts via blocks.
 
 ### Simple test:
 
-```
+```groovy
 // test suite
 class MyFirstTest extends JenkinsPipelineSpecification {
   
@@ -45,7 +45,7 @@ Spock supports BDD style testing via blocks out of the box. 6 blocks are availab
 * `where` : data driven testing
 
 Extending our example:
-```
+```groovy
 class MyFirstTest extends JenkinsPipelineSpecification {
   
   def "Test Name"():     // test definition
@@ -63,11 +63,24 @@ class MyFirstTest extends JenkinsPipelineSpecification {
 
 all boolean expressions inside expect and then blocks are asserted, you can use groovys `assert` keyword to check expressions anywhere else.
 
+You can even add documentation to your test, by adding string after the block, and use `and` to make it more readable:
+
+```groovy
+
+given: "open a database connection"
+// code goes here
+
+and: "seed the customer table"
+// code goes here
+
+and: "seed the product table"
+// code goes here
+```
 ### Spec setup methods:
 
-To surprise nobody there are methods to run before each feature method, once per spec, and same for cleanup:
+To surprise nobody, there are methods to run before each feature method, once per spec, and same for cleanup:
 
-```
+```groovy
 def setupSpec() {}    // runs once -  before the first feature method
 def setup() {}        // runs before every feature method
 def cleanup() {}      // runs after every feature method
@@ -78,7 +91,7 @@ def cleanupSpec() {}  // runs once -  after the last feature method
 
 If you need to test more conditions at once, use `where:` block,several syntactic ways to use it, my favorite is data table:
 
-```
+```groovy
 class MathSpec extends Specification {
   def "maximum of two numbers"(int a, int b, int c) {
     expect:
@@ -97,11 +110,11 @@ more here: [http://spockframework.org/spock/docs/1.3/data_driven_testing.html](h
 
 ### Cardinality:
 
-Spock supports cardinality testing with `<int> *` syntax: 
+Spock supports cardinality testing with `<int> *` syntax, number represents number of calls to given method:
 
-```
-1 * subscriber.receive("hello")      // exactly one call
-0 * subscriber.receive("hello")      // zero calls
+```groovy
+1 * MyFunction.method("hello")      // exactly one call
+0 * MyFunction.method("hello")      // zero calls
 ```
 [http://spockframework.org/spock/docs/1.3/interaction_based_testing.html#_cardinality](http://spockframework.org/spock/docs/1.3/interaction_based_testing.html#_cardinality)
 
@@ -116,7 +129,7 @@ Spock supports cardinality testing with `<int> *` syntax:
 >
 >Now, whenever we call a method on our PaymentGateway mock, a default response will be given, without a real instance being invoked:
 >
->```
+>```groovy
 >when:
 >    def result = paymentGateway.makePayment(12.99)
 > 
@@ -130,7 +143,7 @@ Spock supports cardinality testing with `<int> *` syntax:
 ### Stubbing:
 >We can also configure methods called on our mock to respond in a certain way to different arguments. Let's try getting our PaymentGateway mock to return true when we make a payment of 20:
 >
->```
+>```groovy
 >given:
 >    paymentGateway.makePayment(20) >> true
 > 
@@ -159,7 +172,7 @@ Spock supports cardinality testing with `<int> *` syntax:
 Although Spock uses a different terminology, many of its concepts and features are inspired by JUnit. Here is a rough comparison:
 
 |Spock                 |JUnit|
-|:---------------------:|:---:|
+|:--------------------:|:---:|
 |Specification         |Test class
 |`setup()`             |`@Before`
 |`cleanup()`           |`@After`
@@ -174,7 +187,7 @@ Although Spock uses a different terminology, many of its concepts and features a
 
 
 
-# Jenkins-Spock library
+# [Jenkins-Spock library](#jenkins-spock-library)
 
 Now we know how to write basic spock tests, lets move to jenkins part.
 
@@ -202,21 +215,21 @@ This class ensures that all pipeline extension points exist as Spock Mock object
 ## Mock Pipeline Steps
 Mock pipeline steps are available at `getPipelineMock("stepName")`. You can verify interactions with them and stub them:
  
-```
+```groovy
 then:
-	1 * getPipelineMock( "echo" )( "hello world" ) // check that echo was called with hello world once
+	1 * getPipelineMock("echo")("hello world") // check that echo was called with hello world once
   //stubs sh call when called with echo hi, to return hi
-	1 * getPipelineMock( "sh" )( [returnStdout: true, script: "echo hi"] ) >> "hi"
+	1 * getPipelineMock("sh")( [returnStdout: true, script: "echo hi"] ) >> "hi"
 ```
 
 For example, the node(...) { ... } step's body is automatically executed:
-```
+```groovy
 when:
-	node( 'some-label' ) {
+	node('some-label') {
 		echo( "hello" )
 	}
 then:
-	1 * getPipelineMock("node")("some-label) // test that node was called with 'some-label`
+	1 * getPipelineMock("node")("some-label") // test that node was called with 'some-label`
 	1 * getPipelineMock("echo")("hello") // test that echo was called with 'hello'
 ```
 
@@ -229,13 +242,13 @@ Jenkins pipeline scripts need a special treatment, because they contain global v
 
 loads our script for testing, and enables us to run them with arguments:
 
-```
+```groovy
 def MyFunction = loadPipelineScriptForTest("vars/MyFunction.groovy")
 MyFunction('test arg')
 ```
 
 If we have some Jenkins global env var in the script, we need to set it to something:
-```
+```groovy
 MyFunction.getBinding().setVariable( "BRANCH_NAME", "master" )
 ```
 
@@ -244,7 +257,7 @@ Method calls on GlobalVariables are available as mocks at `getPipelineMock("Vari
 ### Stubbing pipeline vars:
 
 stubbing is done like for all mocks, just stub .call method:
-```
+```groovy
 given:
   //when MyFunction gets called with Hello, return Hello World.
 	getPipelineMock("MyFunction.call")("Hello") >> "Hello World"
@@ -260,7 +273,7 @@ then:
 
 You can also test whole pipeline JenkinsFiles, only difference is you have to call `.run()` on them, after loaded from `loadPipelineScriptForTest()`
 
-```
+```groovy
 def "Jenkinsfile"() {
 	setup:
 		def Jenkinsfile = loadPipelineScriptForTest("com/homeaway/CoolJenkinsfile.groovy")

@@ -9,12 +9,12 @@ permalink:           :categories/:title/
 # Setup
 title:               cvak's blog
 tagline:             "Programming, DevOps, making stuff"
-description:         'A stable place for longer posts not fitting reddit.'
+description:         'A stable place for longer posts.'
 baseurl:             'https://blogmann.cf'
-paginate:           3 
+paginate:            3 
 
 github:
-  url:                 https://github.com/cvakiitho/blog
+  url:               https://github.com/cvakiitho/blog
 
 # About/contact
 author:
