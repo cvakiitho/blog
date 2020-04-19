@@ -7,7 +7,7 @@ highlighter:      rouge
 permalink:           :categories/:title/
 
 # Setup
-title:               cvak's blog
+title:               Tomáš Hartmann's blog
 tagline:             "Programming, DevOps, making stuff"
 description:         'A stable place for longer posts.'
 baseurl:             'https://blogmann.cf'
@@ -18,7 +18,7 @@ github:
 
 # About/contact
 author:
-  name:              Tomas Hartmann
+  name:              Tomáš Hartmann
   url:               http://twitter.com/cvakiitho
   email:             hart@mann.cf
 

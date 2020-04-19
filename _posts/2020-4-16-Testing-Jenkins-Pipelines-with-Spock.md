@@ -57,7 +57,7 @@ class MyFirstTest extends JenkinsPipelineSpecification {
       int results = left + right
 
     expect:
-        result == 2           // implicit assertion
+        results == 2           // implicit assertion
 }
 ```
 
